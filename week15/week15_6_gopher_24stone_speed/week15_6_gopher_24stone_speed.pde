@@ -40,22 +40,24 @@ void setup(){
 int x=300, y=0, dx=0, dy=0;
 void draw(){
   image(bg, 0, 0);
-  image(soil, 0, 160-y);
+  int y2=0;
+  if(y > (24-6)*80) y2=y-(24-6)*80;
+  image(soil, 0, 160-y+y2);
   int speed=3;
   for(int i = 0; i < 24; i++){
     for(int j = 0; j < 8; j++){
       if(stone[i][j] == 1) {
-        image(stone1, 80*j, 80*i+160-y);
+        image(stone1, 80*j, 80*i+160-y+y2);
       if(dist(x,y-80, 80*j, 80*i)<40) speed=2;
     }
     else if(stone[i][j] == 2){
-      image(stone1, 80*j, 80*i+160-y);
-      image(stone2, 80*j, 80*i+160-y);
+      image(stone1, 80*j, 80*i+160-y+y2);
+      image(stone2, 80*j, 80*i+160-y+y2);
       if(dist(x,y-80, 80*j, 80*i)<40) speed=1;
     }
     }
   }
-  image(gopher, x, 80);
+  image(gopher, x, 80+y2);
   x += dx*speed; y += dy*speed;
 }
 void keyPressed(){
